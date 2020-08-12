@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Max.Api.Areas.Admin.Models;
 using Max.Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +21,18 @@ namespace Max.Api.Areas.Admin.Controllers
         {
             _context = context;
         }
-
         // GET: api/Users
-    
+
+        [HttpGet]
+        public async Task<ActionResult<test>> GetTime()
+        {
+            DateTime time = DateTime.UtcNow;
+            var testResult = new test();
+            testResult.createdDate = time;
+            return testResult;
+        }
+        // GET: api/Users
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
@@ -44,7 +54,7 @@ namespace Max.Api.Areas.Admin.Controllers
         ///     }
         ///
         /// </remarks>
-        /// <param name="item"></param>
+        /// <param name="id">id</param>
         /// <returns>A newly created TodoItem</returns>
         /// <response code="201">Returns the newly created item</response>
         /// <response code="400">If the item is null</response>          
